@@ -8,22 +8,114 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:layout_margin="5sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="11"
-        android:gravity="center"
+        android:layout_weight="6"
         android:orientation="vertical"
         >
         <TextView
-            android:id="@+id/tv_kernel_version"
-            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Kernel Version: "
-            android:textColor="#000"
-            android:layout_marginBottom="20sp"
+            android:text="Equinox Kernel"
+            android:textSize="40sp"
             />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:layout_margin="5sp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/tv_kernel_installed_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Installed Version: "
+                    android:textSize="15sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Latest Version: "
+                    android:id="@+id/tv_kernel_latest_version"
+                    />
+
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_kernel_update"
+                android:text="Update"
+                />
+        </LinearLayout>
+
+
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_margin="5sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Equinox Manager"
+            android:textSize="40sp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:layout_margin="5sp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_weight="4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:id="@+id/tv_app_installed_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Installed Version: "
+                    android:textSize="15sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="Latest Version: "
+                    android:id="@+id/tv_app_latest_version"
+                    />
+
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_app_update"
+                android:text="Update"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:gravity="center"

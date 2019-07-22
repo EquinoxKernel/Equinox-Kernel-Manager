@@ -12,6 +12,9 @@ public class UpdateHelper {
     public static final String KEY_APP_UPDATE_VERSION = "app_update_version";
     public static final String KEY_APP_UPDATE_URL = "app_update_url";
 
+    public static final String KEY_KERNEL_UPDATE_REQUIRED = "kernel_update_required";
+    public static final String KEY_KERNEL_UPDATE_VERSION = "kernel_update_version";
+    public static final String KEY_KERNEL_UPDATE_URL = "kernel_update_url";
 
     private Context context;
     private OnUpdateNeededListner onUpdateNeededListner;
@@ -42,6 +45,11 @@ public class UpdateHelper {
         return result;
     }
 
+    private String getKernelVersion(){
+        String kernel_version = System.getProperty("os.version");
+        return kernel_version;
+    }
+
     public static Builder with(Context context){
         return new Builder(context);
     }
@@ -58,9 +66,20 @@ public class UpdateHelper {
             if(!TextUtils.equals(appVersion,updateVersion) && onUpdateNeededListner!=null){
                 onUpdateNeededListner.onUpdateNeeded(updateUrl);
             }
+        }
 
+        if(remoteConfig.getBoolean(KEY_KERNEL_UPDATE_REQUIRED)){
+            String kernel_update_version = remoteConfig.getString(KEY_KERNEL_UPDATE_VERSION);
+            String kernel_update_url = remoteConfig.getString(KEY_KERNEL_UPDATE_URL);
+
+            String kernel_version = getKernelVersion();
+            Log.v("shanu","Kernel Version="+kernel_version+" update version="+kernel_update_version);
+            if(!TextUtils.equals(kernel_version,kernel_update_version) && onUpdateNeededListner!=null){
+                onUpdateNeededListner.onUpdateNeeded(kernel_update_url);
+            }
         }
     }
+
 
     public static class Builder{
         private Context context;

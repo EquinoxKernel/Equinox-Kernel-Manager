@@ -22,11 +22,15 @@ public class App extends Application {
 
         //set in-app default
         Map<String,Object> remoteConfigDefaults = new HashMap<>();
+        //app configs
         remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_REQUIRED,false);
         remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_VERSION,1.0);
         remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_URL,"http://www.google.com");
 
-
+        //kernel update configs
+        remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_REQUIRED,false);
+        remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_VERSION,"4.4.186-Equinox-V-0.6.1T");
+        remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_URL,"http://www.github.com");
 
 
         remoteConfig.setDefaults(remoteConfigDefaults);
@@ -41,6 +45,5 @@ public class App extends Application {
                         }
                     }
                 });
-
     }
 }
