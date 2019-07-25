@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements UpdateHelper.OnUp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        checkEquinox();
+
         tv_app_installed_version = findViewById(R.id.tv_app_installed_version);
         tv_app_latest_version = findViewById(R.id.tv_app_latest_version);
         tv_kernel_installed_version = findViewById(R.id.tv_kernel_installed_version);
@@ -37,19 +39,7 @@ public class MainActivity extends AppCompatActivity implements UpdateHelper.OnUp
         btn_kernel_update = findViewById(R.id.btn_kernel_update);
         btn_app_update = findViewById(R.id.btn_app_update);
 
-
-
         UpdateHelper.with(this).onUpdateNeeded(this).check();
-
-
-
-//        String kernel_version = System.getProperty("os.version");
-//        Log.v("shanu", "kernel version = " + kernel_version);
-//        if (kernel_version.contains("Equinox")) {
-//            Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(this, "Wrong", Toast.LENGTH_SHORT).show();
-//        }
 
         String kernel_installed_version = System.getProperty("os.version");
         String app_installed_version = getAppVersion();
@@ -113,26 +103,24 @@ public class MainActivity extends AppCompatActivity implements UpdateHelper.OnUp
     public void onUpdateNeeded(final String updateUrl) {
         Log.v("shanu","alert dialog");
 
+        final AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("New version available")
+                .setMessage("Please, update the app to new version for latest features")
+                .setPositiveButton("Download", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        downloadNewVersion(updateUrl);
+                    }
+                })
+                .setNegativeButton("Later", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
 
-
-//        final AlertDialog alertDialog = new AlertDialog.Builder(this)
-//                .setTitle("New version available")
-//                .setMessage("Please, update the app to new version for latest features")
-//                .setPositiveButton("Download", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        downloadNewVersion(updateUrl);
-//                    }
-//                })
-//                .setNegativeButton("Later", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        finish();
-//
-//                    }
-//                })
-//                .create();
-//        alertDialog.show();
+                    }
+                })
+                .create();
+        alertDialog.show();
     }
 
     private void downloadNewVersion(String updateUrl) {
@@ -141,5 +129,32 @@ public class MainActivity extends AppCompatActivity implements UpdateHelper.OnUp
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(updateUrl));
         startActivity(intent);
+    }
+
+    public void checkEquinox(){
+        String kernel_version = getKernelVersion();
+        if(!kernel_version.contains("Equinox")) {
+            final AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setTitle("Kernel Mismatch")
+                    .setMessage("Equinox Kernel Needed. Install Equinox Kernel First")
+                    .setPositiveButton("Download", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            downloadNewVersion("https://github.com/sujitroy/Equinox-kernel/releases");
+                        }
+                    })
+                    .setNegativeButton("Later", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .create();
+            alertDialog.show();
+        }
+    }
+    private String getKernelVersion(){
+        String kernel_version = System.getProperty("os.version");
+        return kernel_version;
     }
 }

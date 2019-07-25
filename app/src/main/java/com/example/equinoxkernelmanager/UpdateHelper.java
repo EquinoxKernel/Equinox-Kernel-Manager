@@ -67,17 +67,6 @@ public class UpdateHelper {
                 onUpdateNeededListner.onUpdateNeeded(updateUrl);
             }
         }
-
-        if(remoteConfig.getBoolean(KEY_KERNEL_UPDATE_REQUIRED)){
-            String kernel_update_version = remoteConfig.getString(KEY_KERNEL_UPDATE_VERSION);
-            String kernel_update_url = remoteConfig.getString(KEY_KERNEL_UPDATE_URL);
-
-            String kernel_version = getKernelVersion();
-            Log.v("shanu","Kernel Version="+kernel_version+" update version="+kernel_update_version);
-            if(!TextUtils.equals(kernel_version,kernel_update_version) && onUpdateNeededListner!=null){
-                onUpdateNeededListner.onUpdateNeeded(kernel_update_url);
-            }
-        }
     }
 
 

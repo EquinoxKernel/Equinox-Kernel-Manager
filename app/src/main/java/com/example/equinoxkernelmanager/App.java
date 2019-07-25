@@ -25,7 +25,7 @@ public class App extends Application {
         //app configs
         remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_REQUIRED,false);
         remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_VERSION,1.0);
-        remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_URL,"https://github.com/sujitroy/Equinox-kernel");
+        remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_URL,"https://github.com/sujitroy/Equinox-kernel/releases");
 
         //kernel update configs
         remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_REQUIRED,false);
