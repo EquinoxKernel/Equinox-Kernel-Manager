@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements UpdateHelper.OnUp
             DownloadFileFromURL downloadFileFromURL = new DownloadFileFromURL();
             downloadFileFromURL.setContext(getApplicationContext());
             downloadFileFromURL.execute(updateUrl);
+            finish();
         }catch (Exception e){
             Log.v("shanu",e.getMessage());
         }

@@ -104,7 +104,7 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
     protected void onProgressUpdate(String... progress) {
         // setting progress percentage
-        Log.v("shanu","progress = "+progress[0]);
+        //Log.v("shanu","progress = "+progress[0]);
         notificationBuilder.setProgress(progressMax,Integer.parseInt(progress[0]),false);
         notificationManager.notify(1,notificationBuilder.build());
     }
@@ -113,17 +113,16 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
     protected void onPostExecute(String file_url) {
         Log.v("shanu","on post execute");
         notificationBuilder.setContentText("Download Finished")
-                .setProgress(0,0,false)
+                .setProgress(progressMax,progressMax,false)
                 .setOngoing(false);
         notificationManager.notify(1,notificationBuilder.build());
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         Intent i = new Intent(Intent.ACTION_VIEW);
-
-        i.setDataAndType(Uri.fromFile(new File(file_url)), "application/vnd.android.package-archive" );
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true);
+        i.setDataAndType(Uri.fromFile(new File(file_url)), "application/vnd.android.package-archive" );
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }
 }
