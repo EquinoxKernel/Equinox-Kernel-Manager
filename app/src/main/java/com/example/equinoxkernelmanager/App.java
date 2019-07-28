@@ -29,7 +29,7 @@ public class App extends Application {
         Map<String,Object> remoteConfigDefaults = new HashMap<>();
         //app configs
         remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_REQUIRED,false);
-        remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_VERSION,1.0);
+        remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_VERSION,1.3);
         remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_URL,"https://github.com/sujitroy/Equinox-kernel/releases");
 
         //kernel update configs
