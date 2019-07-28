@@ -1,6 +1,8 @@
 package com.example.equinoxkernelmanager;
 
 import android.app.Application;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -13,12 +15,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class App extends Application {
+    public static final String CHANNEL_ID = "download_status";
+    public static final String CHANNEL_NAME = "Download Status";
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-        final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.getInstance();
 
+        final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.getInstance();
 
         //set in-app default
         Map<String,Object> remoteConfigDefaults = new HashMap<>();
@@ -45,5 +50,19 @@ public class App extends Application {
                         }
                     }
                 });
+
+        createNotificationChannel();
+    }
+
+    private void createNotificationChannel(){
+        // we are using min SDK 28
+        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+                );
+        notificationChannel.setDescription("This is download status.");
+
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(notificationChannel);
     }
 }

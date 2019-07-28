@@ -1,5 +1,7 @@
 package com.example.equinoxkernelmanager;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +10,9 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -21,6 +26,9 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
     String pathFolder = "";
     String pathFile = "";
     Context context;
+    NotificationManagerCompat notificationManager;
+    NotificationCompat.Builder notificationBuilder;
+    final int progressMax = 100;
 
 
 
@@ -35,13 +43,19 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
         super.onPreExecute();
 
         Log.v("shanu","on execute");
-        //pd = new ProgressDialog(DownloadActivity.class);
-//        pd.setTitle("Processing...");
-//        pd.setMessage("Please wait.");
-//        pd.setMax(100);
-//        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-//        pd.setCancelable(true);
-//        pd.show();
+
+        notificationManager = NotificationManagerCompat.from(context);
+
+        notificationBuilder = new NotificationCompat.Builder(context,App.CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_file_download)
+                .setContentTitle("Download")
+                .setContentText("Downloading in progress")
+                .setOngoing(true)
+                .setOnlyAlertOnce(true)
+                .setCategory(NotificationCompat.CATEGORY_PROGRESS)
+                .setProgress(progressMax,0,false);
+
+        notificationManager.notify(1, notificationBuilder.build());
     }
 
     @Override
@@ -98,16 +112,19 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
     protected void onProgressUpdate(String... progress) {
         // setting progress percentage
-        //pd.setProgress(Integer.parseInt(progress[0]));
         Log.v("shanu","progress = "+progress[0]);
+        notificationBuilder.setProgress(progressMax,Integer.parseInt(progress[0]),false);
+        notificationManager.notify(1,notificationBuilder.build());
     }
 
     @Override
     protected void onPostExecute(String file_url) {
-//        if (pd!=null) {
-//            pd.dismiss();
-//        }
         Log.v("shanu","on post execute");
+        notificationBuilder.setContentText("Download Finished")
+                .setProgress(0,0,false)
+                .setOngoing(false);
+        notificationManager.notify(1,notificationBuilder.build());
+
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         Intent i = new Intent(Intent.ACTION_VIEW);
