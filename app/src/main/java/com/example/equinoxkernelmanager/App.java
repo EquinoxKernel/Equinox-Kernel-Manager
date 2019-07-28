@@ -29,7 +29,7 @@ public class App extends Application {
 
         //kernel update configs
         remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_REQUIRED,false);
-        remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_VERSION,"4.4.186-Equinox-V-0.6.1T");
+        remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_VERSION,"4.4.186-Equinox-V-0.6.2T-EAS");
         remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_URL,"https://github.com/ShanuDey/Equinox-Manager/releases");
 
 

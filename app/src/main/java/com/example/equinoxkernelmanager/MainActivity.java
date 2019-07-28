@@ -115,8 +115,7 @@ public class MainActivity extends AppCompatActivity implements UpdateHelper.OnUp
                 .setNegativeButton("Later", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
-
+                        dialog.dismiss();
                     }
                 })
                 .create();
