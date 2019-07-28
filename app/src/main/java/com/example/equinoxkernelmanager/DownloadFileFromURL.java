@@ -1,13 +1,9 @@
 package com.example.equinoxkernelmanager;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.os.StrictMode;
 import android.util.Log;
 
@@ -30,13 +26,9 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
     NotificationCompat.Builder notificationBuilder;
     final int progressMax = 100;
 
-
-
     public void setContext(Context context){
         this.context = context;
     }
-
-
 
     @Override
     protected void onPreExecute() {
@@ -75,7 +67,7 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
             URLConnection connection = url.openConnection();
             connection.connect();
 
-            // this will be useful so that you can show a tipical 0-100%
+            // this will be useful so that you can show a typical 0-100%
             // progress bar
             int lengthOfFile = connection.getContentLength();
 
@@ -134,5 +126,4 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
         i.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true);
         context.startActivity(i);
     }
-
 }
