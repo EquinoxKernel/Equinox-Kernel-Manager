@@ -69,7 +69,9 @@ public class MainActivity extends AppCompatActivity implements UpdateHelper.OnUp
             @Override
             public void onClick(View v) {
                 String app_update_url = remoteConfig.getString(UpdateHelper.KEY_APP_UPDATE_URL);
-                downloadNewVersion(app_update_url);
+                updateApp(app_update_url);
+                btn_app_update.setEnabled(false);
+                btn_app_update.setText("Downloading");
             }
         });
 
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements UpdateHelper.OnUp
                 .setPositiveButton("Download", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        downloadNewVersion(updateUrl);
+                        updateApp(updateUrl);
                     }
                 })
                 .setNegativeButton("Later", new DialogInterface.OnClickListener() {
@@ -128,6 +130,18 @@ public class MainActivity extends AppCompatActivity implements UpdateHelper.OnUp
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(updateUrl));
         startActivity(intent);
+
+    }
+
+    public void updateApp(String updateUrl){
+        Log.v("shanu","downloading from "+updateUrl);
+        try {
+            DownloadFileFromURL downloadFileFromURL = new DownloadFileFromURL();
+            downloadFileFromURL.setContext(getApplicationContext());
+            downloadFileFromURL.execute(updateUrl);
+        }catch (Exception e){
+            Log.v("shanu",e.getMessage());
+        }
     }
 
     public void checkEquinox(){
