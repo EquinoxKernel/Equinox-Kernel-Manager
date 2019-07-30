@@ -30,12 +30,12 @@ public class App extends Application {
         //app configs
         remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_REQUIRED,false);
         remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_VERSION,1.3);
-        remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_URL,"https://github.com/sujitroy/Equinox-kernel/releases");
+        remoteConfigDefaults.put(UpdateHelper.KEY_APP_UPDATE_URL,"https://github.com/equinox-kernel/Equinox-Manager-Releases/releases");
 
         //kernel update configs
         remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_REQUIRED,false);
         remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_VERSION,"4.4.186-Equinox-V-0.6.2T-EAS");
-        remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_URL,"https://github.com/ShanuDey/Equinox-Manager/releases");
+        remoteConfigDefaults.put(UpdateHelper.KEY_KERNEL_UPDATE_URL,"https://github.com/sujitroy/Equinox-kernel/releases");
 
 
         remoteConfig.setDefaults(remoteConfigDefaults);
