@@ -40,8 +40,8 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
         notificationBuilder = new NotificationCompat.Builder(context,App.CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_file_download)
-                .setContentTitle("Download")
-                .setContentText("Downloading in progress")
+                .setContentTitle("Downloading in progress")
+                .setContentText("Starting")
                 .setOngoing(true)
                 .setOnlyAlertOnce(true)
                 .setCategory(NotificationCompat.CATEGORY_PROGRESS)
@@ -106,6 +106,7 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
         // setting progress percentage
         //Log.v("shanu","progress = "+progress[0]);
         notificationBuilder.setProgress(progressMax,Integer.parseInt(progress[0]),false);
+        notificationBuilder.setContentText(progress[0]+" %");
         notificationManager.notify(1,notificationBuilder.build());
     }
 
@@ -113,6 +114,7 @@ class DownloadFileFromURL extends AsyncTask<String, String, String> {
     protected void onPostExecute(String file_url) {
         Log.v("shanu","on post execute");
         notificationBuilder.setContentText("Download Finished")
+                .setContentTitle("Downloaded")
                 .setProgress(progressMax,progressMax,false)
                 .setOngoing(false);
         notificationManager.notify(1,notificationBuilder.build());
